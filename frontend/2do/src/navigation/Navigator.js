@@ -1,13 +1,16 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
-import * as eva from "@eva-design/eva";
+import MenuNavigator from "./MenuNavigator";
 
 export default function Navigator() {
   const Root = createStackNavigator();
 
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <Root.Screen name="MainNavigator"></Root.Screen>
-    </ApplicationProvider>
+    <Root.Navigator
+      screenOptions={{ animationEnabled: false, headerShown: false }}
+    >
+      <Root.Screen name="MenuNavigator">
+        {(props) => <MenuNavigator {...props} />}
+      </Root.Screen>
+    </Root.Navigator>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Text,
   View,
   StyleSheet,
   Image,
@@ -10,6 +11,7 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
+import ScreenNavigator from "./ScreenNavigator";
 
 export default function MenuNavigator({ navigation }) {
   const Drawer = createDrawerNavigator();
@@ -24,11 +26,20 @@ export default function MenuNavigator({ navigation }) {
         drawerActiveBackgroundColor: "rgb(255,255,255)",
       }}
       drawerContent={(props) => {
-        <DrawerContentScrollView
-          {...props}
-          style={{ backgroundColor: "white" }}
-        ></DrawerContentScrollView>;
+        <SafeAreaView style={{ flex: 1 }}>
+          <DrawerContentScrollView
+            {...props}
+            style={{ backgroundColor: "white" }}
+          >
+            <Text>Drawer nav test</Text>
+          </DrawerContentScrollView>
+        </SafeAreaView>;
       }}
-    ></Drawer.Navigator>
+    >
+      <Drawer.Screen
+        name="Main"
+        children={() => <ScreenNavigator initialScreen={"MainScreen"} />}
+      />
+    </Drawer.Navigator>
   );
 }
